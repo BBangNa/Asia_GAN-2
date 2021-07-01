@@ -8,12 +8,12 @@
 #크롤링 파일은 https://url.kr/rjbvyg 에 업로드
 
 #이런 식으로 사전에 통일감 있게 만들기
-class crawling_naver() :
-    def crawling (self, page, url) :
-        pass
-
-    def data_save (self, path) :
-        pass
+# class crawling_naver() :
+#     def crawling (self, page, url) :
+#         pass
+#
+#     def data_save (self, path) :
+#         pass
 
 from selenium import webdriver
 import pandas as pd
