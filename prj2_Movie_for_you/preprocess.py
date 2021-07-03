@@ -12,7 +12,7 @@ import pandas as pd
 from konlpy.tag import Okt
 import re
 
-df = pd.read_csv('./reviews_2018.csv', index_col=0)
+df = pd.read_csv('./crawling/reviews_2016.csv', index_col=0)
 print(df.head())
 
 # a = '1a25ds94kl가나다라마'
@@ -48,7 +48,7 @@ print(df_cleaned_token.head(20))
 stopwords = pd.read_csv('./stopwords.csv', index_col=0)
 print(stopwords.head())
 
-movie_stopwords = ['영화', '배우', '감독']
+movie_stopwords = ['영화', '배우', '감독', '관객', '작품', '주인공', '개봉', '촬영']
 stopwords_list = list(stopwords.stopword) + movie_stopwords
 
 # words = []
@@ -70,7 +70,7 @@ for sentence in df.reviews:
     print('.', end='')
   if count % 100 == 0:
     print('')
-  sentence = re.sub('[^가-힣 | ' ']', '', sentence)
+  sentence = re.sub('[^가-힣 | ' ']', '', str(sentence))
   token = okt.pos(sentence, stem=True) # 동사와 형용사는 원형으로 , 하나의 문장이 길수록 형태소 분류가 오래걸림
   df_token = pd.DataFrame(token, columns=['word', 'class'])
   df_cleaned_token = df_token[(df_token['class'] == 'Noun') | # 명사
@@ -90,7 +90,7 @@ print(df.info())
 
 df = df[['titles', 'cleaned_sentences']]
 print(df.info())
-df.to_csv('./cleaned_review_2018.csv')
+df.to_csv('./crawling/cleaned_review_2016.csv')
 
 
 
